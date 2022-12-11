@@ -1,5 +1,20 @@
 <?php 
 $connect = mysqli_connect('localhost', 'root', '', 'crud');
+
+
+// Making Database Deleting Function
+if(isset($_GET['deleteid'])){
+  $deleteid = $_GET['deleteid'];
+
+  $sql = " DELETE FROM zoo WHERE id = $deleteid ";
+
+  // Checking 
+  if(mysqli_query($connect, $sql) == TRUE){
+    header('location:view.php');
+  }
+}
+
+
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="">
@@ -81,7 +96,7 @@ $connect = mysqli_connect('localhost', 'root', '', 'crud');
           </td>
           <td>
           <button class='btn btn-danger'>
-          <a class='text-white text-decoration-none' href='view.php?id=$id'>Delete</a>
+          <a class='text-white text-decoration-none' href='view.php?deleteid=$id'>Delete</a>
           </button>
           </td>
         </tr>

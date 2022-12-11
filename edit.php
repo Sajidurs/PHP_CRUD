@@ -2,32 +2,43 @@
 
 
 //  Connecting Database
-$server = "sql203.epizy.com";
-$username = "epiz_33178312";
-$password = "INfinity";
-$dbname = "epiz_33178312_crud";
-
 $connect = mysqli_connect('localhost', 'root', '', 'crud');
+if($_GET['id']){
+  $getid= $_GET['id'];
 
-if(isset($_POST['submit'])){
-  $name= $_POST['name'];
-  $email= $_POST['email'];
-  $mobile= $_POST['mobile'];
-  $password= $_POST['password'];
+  $sql = "SELECT * FROM zoo WHERE id=$getid";
 
-  $sql = "INSERT INTO zoo(name, email, mobile, password) 
-  values ('$name', '$email', '$mobile', '$password')";
+  $query = mysqli_query($connect, $sql);
+  $data = mysqli_fetch_assoc($query);
 
-  if(mysqli_query($connect,$sql) == TRUE){
-    echo "Punggai Kapor Ache";
-
-    // Making it non submitable again after refreshing the page
-    header('location:view.php');
-  } else{
-    echo "Need Nelps?";
-  }
-
+  $id       = $data['id'];
+  $name     = $data['name'];
+  $email    = $data['email'];
+  $mobile   = $data['mobile'];
+  $password = $data['password'];
 }
+  // Set up
+  if(isset($_POST['update'])){
+    $id = $_POST['id'];
+    $u_name = $_POST['name'];
+    $u_email = $_POST['email'];
+    $u_mobile = $_POST['mobile'];
+    $u_password = $_POST['password'];
+
+    $sqli = "UPDATE zoo 
+    SET name ='$u_name', email='$u_email', mobile='$u_mobile', password='$u_password' WHERE id = '$id'";
+ 
+    if(mysqli_query($connect, $sqli) == TRUE){
+    header('location:view.php');
+    echo "Update Success";
+    } else{
+    echo "Sorry Data Not Updated";
+    }
+   
+}
+
+
+
 // ?>
 
 <!DOCTYPE html>
@@ -75,43 +86,35 @@ if(isset($_POST['submit'])){
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Add an User</h2>
+              <h2 class="text-uppercase text-center mb-5">You're Editing The User</h2>
 
-              <form method="POST">
+              <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
                 <div class="form-outline form-group mb-4">
-                  <input type="text" id="form3Example1cg" name="name" autocomplete="off" class="form-control form-control-lg" />
+                  <input type="text" id="form3Example1cg" value="<?php echo $name ?>" name="name" autocomplete="off" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example1cg">Your Name</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" name="email" autocomplete="off" class="form-control form-control-lg" />
+                  <input type="email" id="form3Example3cg" value="<?php echo $email ?>" name="email" autocomplete="off" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example3cg">Your Email</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example4cg" name="mobile" autocomplete="off" class="form-control form-control-lg" />
+                  <input type="text" id="form3Example4cg" value="<?php echo $mobile ?>" name="mobile" autocomplete="off" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example4cg">Mobile</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cdg" name="password" autocomplete="off" class="form-control form-control-lg" />
+                  <input type="password" id="form3Example4cdg" value="<?php echo $password ?>" name="password" autocomplete="off" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example4cdg">Password</label>
                 </div>
 
-                <div class="form-check d-flex justify-content-center mb-5">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                  <label class="form-check-label" for="form2Example3g">
-                    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                  </label>
-                </div>
+                <input type="text" value="<?php echo $id ?>" name="id" autocomplete="off" class="form-control form-control-lg" hidden />
 
                 <div class="d-flex justify-content-center">
-                    <button type="submit" name="submit" class="btn btn-primary">Add User</button>
+                    <input type="submit" name="update" value="Update" class="btn btn-primary">
                 </div>
-
-                <p class="text-center text-muted mt-5 mb-0">Want to see all users? <a href="view.php"
-                    class="fw-bold text-body"><u>See All Details</u></a></p>
               </form>
 
             </div>
