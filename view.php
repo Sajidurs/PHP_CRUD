@@ -39,7 +39,8 @@ $connect = mysqli_connect('localhost', 'root', '', 'crud');
 
 <div class="container">
   <h2>Condensed Table</h2>
-  <p>The .table-condensed class makes a table more compact by cutting cell padding in half:</p>            
+  <p>View All The Added Details About Students</p>            
+  <a href="user.php">Add Student</a>            
   
 
     <?php
@@ -54,6 +55,8 @@ $connect = mysqli_connect('localhost', 'root', '', 'crud');
           <th>Email</th>
           <th>Mobile</th>
           <th>Password</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
     ";
@@ -71,6 +74,16 @@ $connect = mysqli_connect('localhost', 'root', '', 'crud');
           <td>$email</td>
           <td>$mobile</td>
           <td>$password</td>
+          <td>
+            <button class='btn btn-info'>
+            <a class='text-white text-decoration-none' href='edit.php?id=$id'>Edit</a>
+            </button>
+          </td>
+          <td>
+          <button class='btn btn-danger'>
+          <a class='text-white text-decoration-none' href='view.php?id=$id'>Delete</a>
+          </button>
+          </td>
         </tr>
       </tbody>";
         

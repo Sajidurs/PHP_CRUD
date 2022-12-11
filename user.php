@@ -89,7 +89,7 @@ if(isset($_POST['submit'])){
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Add an User</h2>
 
-              <form method="POST">
+              <form method="POST" action="view.php">
 
                 <div class="form-outline form-group mb-4">
                   <input type="text" id="form3Example1cg" name="name" autocomplete="off" class="form-control form-control-lg" />
@@ -122,8 +122,8 @@ if(isset($_POST['submit'])){
                     <button type="submit" name="submit" class="btn btn-primary">Add User</button>
                 </div>
 
-                <p class="text-center text-muted mt-5 mb-0">Want to see all users? <a href="#!"
-                    class="fw-bold text-body"><u>Click here</u></a></p>
+                <p class="text-center text-muted mt-5 mb-0">Want to see all users? <a href="view.php"
+                    class="fw-bold text-body"><u>See All Details</u></a></p>
               </form>
 
             </div>
