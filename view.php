@@ -1,4 +1,6 @@
-
+<?php 
+$connect = mysqli_connect('localhost', 'root', '', 'crud');
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="">
 
@@ -43,36 +45,37 @@
     <?php
      $sql = "SELECT * FROM zoo";
      $query = mysqli_query($connect, $sql);
-     
-     echo "<table class='table table-condensed'>";
 
-     while($data = mysqli_fetch_assoc($query)){
+    echo "<table class='table table-condensed'>
+    <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+    ";
+    while($data = mysqli_fetch_assoc($query)){
         $id = $data['id'];
         $name = $data['name'];
         $email = $data['email'];
         $mobile = $data['mobile'];
         $password = $data['password'];
 
-        echo $id. '' .$name. '' .$email. '' .$mobile. '' .$email;
+        echo "<tbody>
+        <tr>
+          <td>$id</td>
+          <td>$name</td>
+          <td>$email</td>
+          <td>$mobile</td>
+          <td>$password</td>
+        </tr>
+      </tbody>";
+        
      }
      ?>
-
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Mobile</th>
-        <th>Password</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>john@example.com</td>
-        <td>01307453627</td>
-        <td>AHGF@#$3322</td>
-      </tr>
-    </tbody>
   </table>
 </div>
 
